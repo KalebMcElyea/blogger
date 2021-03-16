@@ -6,48 +6,31 @@ class BlogsService {
   async getAllBlogs() {
     const res = await api.get('api/blogs')
     AppState.blogs = res.data
-    logger.log(res.data)
   }
 
   async getBlog(id) {
-    try {
-      const res = await api.get('api/blogs/' + id)
-      AppState.activeBlog = res.data
-    } catch (error) {
-      logger.log(error)
-    }
+    const res = await api.get('api/blogs/' + id)
+    AppState.activeBlog = res.data
   }
 
-  async getAccountBlogs(id) {
-    try {
-      const res = await api.get('account/blogs/' + id)
-      AppState.accountBlog = res.data
-    } catch (error) {
-      logger.log(error)
-    }
+  async getAccountBlogs() {
+    const res = await api.get('account/blogs')
+    AppState.accountBlog = res.data
   }
 
   async editBlog(id) {
-    try {
-      const res = await api.put('api/blogs/' + id)
-      AppState.myBlog = res.data
-    } catch (error) {
-      logger.log(error)
-    }
+    const res = await api.put('api/blogs/' + id)
+    AppState.myBlog = res.data
   }
 
   async createBlog(rawBlog) {
-    try {
-      await api.post('api/blogs/', rawBlog)
-      this.getAllBlogs()
-    } catch (error) {
-      logger.log(error)
-    }
+    await api.post('api/blogs/', rawBlog)
+    this.getAllBlogs()
   }
 
   async deleteBlog(id) {
     await api.delete('api/blogs/' + id)
-    this.getBlog()
+    this.getAllBlogs()
   }
 
   async getComments(id) {
@@ -59,9 +42,16 @@ class BlogsService {
     }
   }
 
-  async creatComment(rawComment) {
+  async createComment(rawComment) {
     await api.post('api/comments/', rawComment)
-    this.getComments()
+  }
+
+  async deleteComment(id) {
+    await api.delete('api/comments/' + id)
+  }
+
+  async editComment(id) {
+    await api.put('api/comments/' + id)
   }
 }
 

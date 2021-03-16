@@ -1,15 +1,12 @@
 <template>
   <div class="flex justify-content-center my-2 col-10" v-if="blog.creator">
-    <router-link :to="{name: 'BlogDetailsPage', params:{id: blogs._id}}">
+    <router-link :to="{name: 'BlogDetailsPage', params:{id: blogs.id}}">
       <div class="card">
         <div class=" p-2">
           <div class="bg-dark rounded">
             <img class="card-img-top">
           </div>
           <div class="card-body">
-            <button class="btn-primary text-dark action m-2" v-if="blog.creator" @click="editBlog">
-              Edit
-            </button>
             <button class="btn-danger text-dark action m-2" @click="deleteBlog" v-if="blog.creator.email == state.user.email">
               Delete
             </button>
@@ -49,11 +46,11 @@ export default {
       async createBlog() {
         await blogsService.createBlog(state.newBlog)
       },
-      async editBlog() {
-        await blogsService.editBlog(state.blogs._id)
+      editBlog(event) {
+        blogsService.editBlog(props.blog.id, event.target.innerText)
       },
       async deleteBlog() {
-        await blogsService.deleteBlog(props.blogs._id)
+        await blogsService.deleteBlog(props.blogs.id)
       }
     }
   }

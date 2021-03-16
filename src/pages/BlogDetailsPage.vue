@@ -9,8 +9,9 @@
             class="form-control"
             placeholder="Comment"
             aria-describedby="helpId"
+            v-model="state.newComment.body"
           />
-          <button type="button" class="btn btn-primary btn-lg m-4" data-toggle="modal" data-target="#create-comment">
+          <button type="button" class="btn btn-primary btn-lg m-4" v-if="state.user.isAuthenticated" @click="createComment()">
             Comment
           </button>
         </div>
@@ -22,8 +23,11 @@
           <br class="p-4">
           <i class="fa fa-comment" aria-hidden="true"></i>  Comment:   {{ state.blogs.body }}
         </h5>
-        <button class="btn-danger text-dark action m-2" v-if="state.user.isAuthenticated" @click="deleteComment">
-          Delete
+        <button class="btn-danger text-dark action m-2" v-if="state.user.isAuthenticated" @click="deleteBlog()">
+          Delete Blog
+        </button>
+        <button class="btn btn-primary text-dark action m-2" v-if="state.user.isAuthenticated" @click="editBlog()">
+          Edit
         </button>
         <div>
           <div class="card p-5">
@@ -55,7 +59,7 @@ export default {
     body: { type: String, required: true }
   },
 
-  setup() {
+  setup(props) {
     const route = useRoute()
 
     const state = reactive({
@@ -73,8 +77,18 @@ export default {
     return {
       route,
       state,
-      async createComments() {
-        await blogsService.creatComment()
+      async createComment() {
+        state.newComment.blog = route.params.id
+        await blogsService.createComment(state.newComment)
+        state.newComment = {}
+      },
+
+      editBlog(props) {
+        blogsService.editBlog(props.blogs.id)
+      },
+
+      deleteBlog() {
+        blogsService.deleteBlog(props.blogs.id)
       }
     }
   },

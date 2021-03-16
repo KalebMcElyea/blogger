@@ -1,16 +1,14 @@
 <template>
   <div class="flex justify-content-center my-2 col-10" v-if="blogs.creator">
-    <router-link :to="{name: 'BlogDetailsPage', params:{id: blogs._id}}">
+    <router-link :to="{name: 'BlogDetailsPage', params:{id: blogs.id}}">
       <div class="card">
         <div class=" p-2">
           <div class="bg-dark rounded">
-            <img class="card-img-top">
           </div>
           <div class="card-body">
             <p><strong>{{ blogs.title }}</strong> </p>
-            <!-- blog.creator.name comes back as null even though the path is correct -->
             <p>{{ blogs.creator.name }}</p>
-            <div class="text-right absolute top right p-2 z-2">
+            <div class="text-right absolute top right p-2">
             </div>
           </div>
         </div>
@@ -44,10 +42,10 @@ export default {
         await blogsService.createBlog(state.newBlog)
       },
       async editBlog() {
-        await blogsService.editBlog(state.blogs._id)
+        await blogsService.editBlog(state.blogs.id)
       },
       async deleteBlog() {
-        await blogsService.deleteBlog(state.blogs._id)
+        await blogsService.deleteBlog(state.blogs.id)
       }
     }
   }

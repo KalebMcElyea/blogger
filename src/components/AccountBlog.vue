@@ -7,34 +7,22 @@
       <h5> {{ accountBlog.title }} </h5>
       <h5> {{ accountBlog.body }} </h5>
       <h5> {{ accountBlog.comments }} </h5>
-      <Blog v-for="blog in state.blogs" :key="blog.id" :blogs="blog" />
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted, reactive } from 'vue'
+import { computed } from 'vue'
 import { AppState } from '../AppState'
 import { api } from '../services/AxiosService'
-import { blogsService } from '../services/BlogsService'
 
 export default {
   name: 'Account',
 
   setup() {
-    const state = reactive({
-      account: computed(() => AppState.account),
-      blogs: computed(() => AppState.myBlog),
-      accountBlog: computed(() => AppState.accountBlog)
-    })
-    onMounted(async() => {
-      await blogsService.getAccountBlogs()
-    })
-
     return {
-      state,
       account: computed(() => AppState.account),
-      blogs: computed(() => AppState.myBlog),
+      blog: computed(() => AppState.myBlog),
       accountBlog: computed(() => AppState.accountBlog),
 
       async getAccountBlogs() {

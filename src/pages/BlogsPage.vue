@@ -47,6 +47,7 @@ import { blogsService } from '../services/BlogsService'
 
 export default {
   name: 'BlogsPage',
+
   setup() {
     const state = reactive({
       blogs: computed(() => AppState.blogs),
