@@ -88,8 +88,7 @@ export default {
       },
 
       deleteBlog() {
-        state.user.id = route.params.id
-        blogsService.deleteBlog(props.blog.id, route.params.id)
+        blogsService.deleteBlog(route.params.id)
       }
     }
   },
