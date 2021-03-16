@@ -7,7 +7,7 @@
       <h5> {{ accountBlog.title }} </h5>
       <h5> {{ accountBlog.body }} </h5>
       <h5> {{ accountBlog.comments }} </h5>
-      <Blog v-for="blog in state.blogs" :key="blog.id" :blogs="blog" />
+      <AccountBlog v-for="accountBlog in state.accountBlog" :key="accountBlog.id" :blogs="accoutBlog" />
     </div>
   </div>
 </template>

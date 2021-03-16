@@ -1,14 +1,14 @@
 <template>
   <div class="about text-center m-3">
-    <h1>Welcome {{ account.name }}</h1>
+    <!-- <h1>Welcome {{ account.name }}</h1>
     <img class="rounded" :src="account.picture" alt="" />
     <p>{{ account.email }}</p>
-    <div class="card">
-      <h5> {{ accountBlog.title }} </h5>
-      <h5> {{ accountBlog.body }} </h5>
-      <h5> {{ accountBlog.comments }} </h5>
-    </div>
+    <div class="card"> -->
+    <h5> {{ accountBlog[0].title }} </h5>
+    <hr>
+    <h5> {{ accountBlog[0].body }} </h5>
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -17,7 +17,7 @@ import { AppState } from '../AppState'
 import { api } from '../services/AxiosService'
 
 export default {
-  name: 'Account',
+  name: 'AccountBlog',
 
   setup() {
     return {

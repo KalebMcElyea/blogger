@@ -26,11 +26,13 @@ import { AppState } from '../AppState'
 
 export default {
   name: 'Comments',
+
   props: {
     comments: { type: Object, required: true },
     body: { type: String, required: true },
     creator: { type: String, required: true }
   },
+
   setup(props) {
     const route = useRoute()
 
